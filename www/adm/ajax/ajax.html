@@ -1,0 +1,11 @@
+@main[]
+^connect[$connect_string]{ 
+   $news[^table::sql{select 
+        header
+   from 
+       news 
+   }] 
+}
+$result[
+	^news.menu{ "$news.header"}
+]
