@@ -4,6 +4,7 @@
 @allNews[]
 ^connect[$connect_string]{ 
    $news[^table::sql{select 
+      id,
       date,
       header
    from 
@@ -11,7 +12,7 @@
    }] 
    ^if($news){ 
       ^news.menu{ 
-         <h3><a href="/news/single/">$news.header</a></h3>
+         <h3><a href="/news/single/?id=$news.id">$news.header</a></h3>
          <em class="date">$news.date</em>
       }[<br />] 
    }{ 
