@@ -4,22 +4,26 @@
 @greeting[] 
 Администрирование новостей 
 
+@sidebarLeft[]
+
+@sidebarRight[]
+
 @body_main[] 
 $now[^date::now[]] 
 <center> 
 <form action="" method="POST"  enctype="multipart/form-data"> 
 <p> 
 Date: <input name="date" value="${now.year}-${now.month}-${now.day}"> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-Header: <input name="header"> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+Header: <input name="header" class="form-control" type="text"> 
 </p> 
-<p>Body:<br /> 
-<textarea cols="50" name="body" rows="5"></textarea> 
-</p> 
-<p> 
+<p>PreBody:<br /> 
+<input class="form-control" type="text" name="prebody"></p> 
+<p>Body<br>
+<textarea class="form-control" cols="50" name="body" rows="5"></textarea> </p>
+
 <input class="btn btn-success" type="submit" id="submitForm" value="Add New" name="posted">&nbsp;&nbsp;&nbsp; 
 <input class="btn btn-default" type="reset" value="Cancel"> <br>
-<input class="btn btn-danger" type="button" id="getNews" value="Получить новости"><br>
 <select name="sidebarPosition">
 	<option value="left">to the left</option>
 	<option value="right">to the right</option>
@@ -27,14 +31,14 @@ Header: <input name="header">
 <input type="file" name="photo" class="btn btn-warning" />
 </p> 
 </form> 
-^if(def $form:date && def $form:header && def $form:body && def $form:photo){ 
+^if(def $form:date && def $form:header && def $form:prebody && def $form:body && def $form:photo){ 
    ^form:photo.save[binary;/upload/photos/^file:justname[$form:photo.name].^file:justext[$form:photo.name]] 
 
    ^connect[$connect_string]{ 
       ^void:sql{insert into news 
-         (date, header, body, position, photo) 
+         (date, header, prebody, body, position, photo) 
       values  
-         ('$form:date', '$form:header', '$form:body', '$form:sidebarPosition', '/upload/photos/^file:justname[$form:photo.name].^file:justext[$form:photo.name]') 
+         ('$form:date', '$form:header', '$form:prebody', '$form:body', '$form:sidebarPosition', '/upload/photos/^file:justname[$form:photo.name].^file:justext[$form:photo.name]') 
       } 
       …сообщение добавлено 
       } 

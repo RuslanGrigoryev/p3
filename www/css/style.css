@@ -1,3 +1,19 @@
 .sidebar {
 	background: #CEE6E1;
 }
+CENTER {
+	padding: 0 20px;
+}
+.alignC {
+	text-align: center;
+}
+.date {
+	display: block;
+	text-align: center;
+}
+.prebody {
+	font-style: italic;
+}
+.body {
+	color: red;
+}

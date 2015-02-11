@@ -116,9 +116,10 @@ $now[^date::now[]]
 @sidebarLeft[]
 ^connect[$connect_string]{ 
    $news[^table::sql{select 
+      id,
       date,
       header,
-      body,
+      prebody,
       position,
       photo   
    from 
@@ -128,11 +129,12 @@ $now[^date::now[]]
    }] 
    ^if($news){ 
       ^news.menu{ 
-         <h3>$news.header</h3>
-         <em>$news.date</em>
-         <img src="$news.photo" alt="Photo"  width="100" height="100"/>
-         <p>
-         ^untaint{$news.body}
+         <h3><a href="/news/single/?id=$news.id">$news.header</a></h3>
+         <em class="date">$news.date</em>
+         <p class="alignC">
+         <img src="$news.photo" alt="Photo"  width="100" height="100"/></p>
+         <p class="prebody">
+         ^untaint{$news.prebody}
          </p>
       }[<br />] 
    }{ 
@@ -152,9 +154,10 @@ $now[^date::now[]]
 @sidebarRight[]
 ^connect[$connect_string]{ 
    $news[^table::sql{select 
+      id,
       date,
       header,
-      body,
+      prebody,
       position,
       photo 
    from 
@@ -164,11 +167,11 @@ $now[^date::now[]]
    }] 
    ^if($news){ 
       ^news.menu{ 
-         <h3>$news.header</h3>
-         <em>$news.date</em>
+         <h3><a href="/news/single/?id=$news.id">$news.header</a></h3>
+         <em class="date">$news.date</em>
          <img src="$news.photo" alt="Photo" width="100" height="100" />
-         <p>
-         ^untaint{$news.body}
+         <p class="prebody">
+         ^untaint{$news.prebody}
          </p>
       }[<br />] 
    }{ 
